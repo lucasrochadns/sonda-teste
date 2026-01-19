@@ -1,5 +1,6 @@
 package br.com.sonda.aeronave.controller;
 
+import br.com.sonda.aeronave.domain.model.Aeronave;
 import br.com.sonda.aeronave.dto.AeronaveDTO;
 import br.com.sonda.aeronave.services.AeronaveService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/aeronaves")
@@ -40,6 +44,11 @@ public class AeronaveController {
     @GetMapping("/nao-vendidas")
     public ResponseEntity<List<AeronaveDTO>> findByVendidoFalse(){
         return ResponseEntity.ok().body(aeronaveService.findByNaoVendido().stream().map(AeronaveDTO::from).toList());
+    }
+
+    @GetMapping("/por-decada")
+    public ResponseEntity<Map<Integer, List<AeronaveDTO>>> findByAnoFabricacao(){
+        return ResponseEntity.ok().body(aeronaveService.findByAnoFabricacao());
     }
 
     @PostMapping

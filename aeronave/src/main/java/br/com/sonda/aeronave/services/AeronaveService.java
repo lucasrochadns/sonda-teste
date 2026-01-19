@@ -15,7 +15,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -62,5 +65,14 @@ public class AeronaveService {
     @Transactional(readOnly = true)
     public List<Aeronave> findByNaoVendido(){
       return aeronaveRepository.findByVendidoFalse();
+    }
+
+    @Transactional(readOnly = true)
+    public Map<Integer, List<AeronaveDTO>> findByAnoFabricacao(){
+        return aeronaveRepository.findAllByOrderByAnoFabricacaoAsc()
+                .stream().collect(Collectors.groupingBy(
+                        a -> (a.getAnoFabricacao() / 10) * 10,
+                        LinkedHashMap::new, Collectors.mapping(AeronaveDTO::from, Collectors.toList())
+                ));
     }
 }

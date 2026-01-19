@@ -31,4 +31,6 @@ public interface AeronaveRepository extends JpaRepository<Aeronave, Long> {
     List<Aeronave> findByTermo(@Param("termo") String termo);
 
     List<Aeronave> findByVendidoFalse();
+
+    List<Aeronave> findAllByOrderByAnoFabricacaoAsc();
 }
