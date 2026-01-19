@@ -6,6 +6,7 @@ import br.com.sonda.aeronave.domain.model.Aeronave;
 import br.com.sonda.aeronave.dto.AeronaveDTO;
 import br.com.sonda.aeronave.repository.AeronaveRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,11 @@ public class AeronaveService {
     @Transactional(readOnly = true)
     public List<AeronaveDTO> find(String termo){
         return aeronaveRepository.findByTermo(termo).stream().map(AeronaveDTO::from).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public AeronaveDTO findById(Long id){
+        return AeronaveDTO.from(aeronaveRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Aeronave Não Encontrada: " + id)));
     }
 }
