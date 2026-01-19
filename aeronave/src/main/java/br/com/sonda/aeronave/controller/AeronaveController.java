@@ -19,35 +19,44 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AeronaveController {
 
-   @Autowired
-   private AeronaveService aeronaveService;
+    @Autowired
+    private AeronaveService aeronaveService;
 
-     @GetMapping
-     public ResponseEntity<Page<AeronaveDTO>> findAll(@PageableDefault(size = 12) Pageable pageable){
-         return ResponseEntity.ok().body(aeronaveService.findAll(pageable).map(AeronaveDTO::from));
-     }
+    @GetMapping
+    public ResponseEntity<Page<AeronaveDTO>> findAll(@PageableDefault(size = 12) Pageable pageable) {
+        return ResponseEntity.ok().body(aeronaveService.findAll(pageable).map(AeronaveDTO::from));
+    }
 
-     @GetMapping("/find")
-     public ResponseEntity<List<AeronaveDTO>> find(@RequestParam String termo){
-         return ResponseEntity.ok().body(aeronaveService.find(termo).stream().map(AeronaveDTO::from).toList());
-     }
+    @GetMapping("/find")
+    public ResponseEntity<List<AeronaveDTO>> find(@RequestParam String termo) {
+        return ResponseEntity.ok().body(aeronaveService.find(termo).stream().map(AeronaveDTO::from).toList());
+    }
 
-     @GetMapping("/{id}")
-    public ResponseEntity<AeronaveDTO> findById(@PathVariable Long id){
-         return ResponseEntity.ok().body(AeronaveDTO.from(aeronaveService.findById(id)));
-     }
+    @GetMapping("/{id}")
+    public ResponseEntity<AeronaveDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(AeronaveDTO.from(aeronaveService.findById(id)));
+    }
 
-     @PostMapping
-     public ResponseEntity<AeronaveDTO> save(@Validated(AeronaveDTO.class) @RequestBody AeronaveDTO aeronaveDTO){
-         return ResponseEntity.status(HttpStatus.CREATED)
-                 .body(AeronaveDTO.from(aeronaveService.save(AeronaveDTO.to(aeronaveDTO))));
-     }
+    @GetMapping("/nao-vendidas")
+    public ResponseEntity<List<AeronaveDTO>> findByVendidoFalse(){
+        return ResponseEntity.ok().body(aeronaveService.findByNaoVendido().stream().map(AeronaveDTO::from).toList());
+    }
 
-     @PutMapping("/{id}")
-    public ResponseEntity<AeronaveDTO> updateById(@PathVariable Long id, @Validated(AeronaveDTO.class)
-     @RequestBody AeronaveDTO aeronaveDTO){
-         System.out.println(aeronaveDTO);
-         return ResponseEntity.ok().body(AeronaveDTO.
-                 from(aeronaveService.updateById(id, AeronaveDTO.to(aeronaveDTO))));
-     }
+    @PostMapping
+    public ResponseEntity<AeronaveDTO> save(@Validated(AeronaveDTO.class) @RequestBody AeronaveDTO aeronaveDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(AeronaveDTO.from(aeronaveService.save(AeronaveDTO.to(aeronaveDTO))));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AeronaveDTO> updateById(@PathVariable Long id, @Validated(AeronaveDTO.class) @RequestBody AeronaveDTO aeronaveDTO) {
+        System.out.println(aeronaveDTO);
+        return ResponseEntity.ok().body(AeronaveDTO.from(aeronaveService.updateById(id, AeronaveDTO.to(aeronaveDTO))));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        aeronaveService.deleteById(id);
+    }
+
 }
