@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +35,12 @@ public class AeronaveController {
      @GetMapping("/{id}")
     public ResponseEntity<AeronaveDTO> findById(@PathVariable Long id){
          return ResponseEntity.ok().body(aeronaveService.findById(id));
+     }
+
+     @PostMapping
+     public ResponseEntity<AeronaveDTO> save(@Validated(AeronaveDTO.class) @RequestBody AeronaveDTO aeronaveDTO){
+         return ResponseEntity.status(HttpStatus.CREATED)
+                 .body(aeronaveService.save(AeronaveDTO.to(aeronaveDTO)));
      }
 
 }

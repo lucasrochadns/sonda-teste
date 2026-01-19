@@ -24,4 +24,11 @@ public record AeronaveDTO (
                 aeronave.getDescricao(), aeronave.getVendido(),
                 aeronave.getCreatedAt(), aeronave.getUpdateAt());
     }
+
+    public static Aeronave to(AeronaveDTO aeronaveDTO){
+        return new Aeronave(aeronaveDTO.id, aeronaveDTO.nome(),
+                aeronaveDTO.fabricante(), aeronaveDTO.anoFabricacao(),
+                aeronaveDTO.descricao, aeronaveDTO.vendido(),
+                aeronaveDTO.createdAt(), aeronaveDTO.updateAt());
+    }
 }

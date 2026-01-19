@@ -40,4 +40,9 @@ public class AeronaveService {
         return AeronaveDTO.from(aeronaveRepository.findById(id)
                 .orElseThrow(()-> new EntityNotFoundException("Aeronave Não Encontrada: " + id)));
     }
+
+    @Transactional
+    public AeronaveDTO save(Aeronave aeronave){
+        return AeronaveDTO.from(aeronaveRepository.save(aeronave));
+    }
 }
