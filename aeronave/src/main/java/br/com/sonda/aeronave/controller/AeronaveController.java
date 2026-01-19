@@ -43,4 +43,10 @@ public class AeronaveController {
                  .body(aeronaveService.save(AeronaveDTO.to(aeronaveDTO)));
      }
 
+     @PutMapping("/{id}")
+    public ResponseEntity<AeronaveDTO> updateById(@PathVariable Long id, @Validated(AeronaveDTO.class)
+     @RequestBody AeronaveDTO aeronaveDTO){
+         System.out.println(aeronaveDTO);
+         return ResponseEntity.ok().body(aeronaveService.updateById(id, AeronaveDTO.to(aeronaveDTO)));
+     }
 }

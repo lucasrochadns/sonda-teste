@@ -45,4 +45,9 @@ public class AeronaveService {
     public AeronaveDTO save(Aeronave aeronave){
         return AeronaveDTO.from(aeronaveRepository.save(aeronave));
     }
+
+    @Transactional
+    public AeronaveDTO updateById(Long id, Aeronave aeronave){
+        return AeronaveDTO.from(aeronaveRepository.save(aeronave));
+    }
 }
