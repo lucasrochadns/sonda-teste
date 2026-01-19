@@ -2,6 +2,8 @@ package br.com.sonda.aeronave.controller;
 
 import br.com.sonda.aeronave.domain.model.Aeronave;
 import br.com.sonda.aeronave.dto.AeronaveDTO;
+import br.com.sonda.aeronave.dto.AeronavePorDecadaDTO;
+import br.com.sonda.aeronave.dto.AeronavePorFabricanteDTO;
 import br.com.sonda.aeronave.services.AeronaveService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,18 @@ public class AeronaveController {
     }
 
     @GetMapping("/por-decada")
-    public ResponseEntity<Map<Integer, List<AeronaveDTO>>> findByAnoFabricacao(){
+    public ResponseEntity<List<AeronavePorDecadaDTO>> findByAnoFabricacao(){
         return ResponseEntity.ok().body(aeronaveService.findByAnoFabricacao());
+    }
+
+    @GetMapping("/por-fabricante")
+    public ResponseEntity<List<AeronavePorFabricanteDTO>> findByFabricante(){
+        return ResponseEntity.ok().body(aeronaveService.findByFabricante());
+    }
+
+    @GetMapping("/ultima-semana")
+    public ResponseEntity<List<AeronaveDTO>> findRecent(){
+        return ResponseEntity.ok().body(aeronaveService.findRecent());
     }
 
     @PostMapping
@@ -67,5 +79,6 @@ public class AeronaveController {
     public void delete(@PathVariable Long id) {
         aeronaveService.deleteById(id);
     }
+
 
 }

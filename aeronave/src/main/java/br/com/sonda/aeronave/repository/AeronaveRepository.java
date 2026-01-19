@@ -7,30 +7,38 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Repository
 public interface AeronaveRepository extends JpaRepository<Aeronave, Long> {
 
 
-
     @Query("""
-   select a from Aeronave a
-   where
-     (
-       :termo is not null and
-       (
-         lower(a.nome) like lower(concat('%', :termo, '%'))
-         or lower(a.descricao) like lower(concat('%', :termo, '%'))
-         or cast(a.fabricante as string) like concat('%', :termo, '%')
-         or cast(a.anoFabricacao as string) = :termo
-         or cast(a.id as string) = :termo
-       )
-     )
-""")
+               select a from Aeronave a
+               where
+                 (
+                   :termo is not null and
+                   (
+                     lower(a.nome) like lower(concat('%', :termo, '%'))
+                     or lower(a.descricao) like lower(concat('%', :termo, '%'))
+                     or cast(a.fabricante as string) like concat('%', :termo, '%')
+                     or cast(a.anoFabricacao as string) = :termo
+                     or cast(a.id as string) = :termo
+                   )
+                 )
+            """)
     List<Aeronave> findByTermo(@Param("termo") String termo);
 
     List<Aeronave> findByVendidoFalse();
 
     List<Aeronave> findAllByOrderByAnoFabricacaoAsc();
+
+    List<Aeronave> findAllByOrderByFabricanteAsc();
+
+    @Query("""
+                select a from Aeronave a where a.createdAt >= :data
+                order by a.createdAt desc
+            """)
+    List<Aeronave> findRecent(@Param("data") OffsetDateTime data);
 }

@@ -3,6 +3,8 @@ package br.com.sonda.aeronave.services;
 
 import br.com.sonda.aeronave.domain.model.Aeronave;
 import br.com.sonda.aeronave.dto.AeronaveDTO;
+import br.com.sonda.aeronave.dto.AeronavePorDecadaDTO;
+import br.com.sonda.aeronave.dto.AeronavePorFabricanteDTO;
 import br.com.sonda.aeronave.repository.AeronaveRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -15,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,11 +71,29 @@ public class AeronaveService {
     }
 
     @Transactional(readOnly = true)
-    public Map<Integer, List<AeronaveDTO>> findByAnoFabricacao(){
+    public List<AeronavePorDecadaDTO> findByAnoFabricacao(){
         return aeronaveRepository.findAllByOrderByAnoFabricacaoAsc()
                 .stream().collect(Collectors.groupingBy(
                         a -> (a.getAnoFabricacao() / 10) * 10,
                         LinkedHashMap::new, Collectors.mapping(AeronaveDTO::from, Collectors.toList())
-                ));
+                )).entrySet()
+                .stream()
+                .map(x -> new AeronavePorDecadaDTO(x.getKey(), x.getValue())).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<AeronavePorFabricanteDTO> findByFabricante(){
+        return aeronaveRepository.findAllByOrderByFabricanteAsc()
+                .stream().collect(Collectors.groupingBy(
+                        Aeronave::getFabricante,
+                        LinkedHashMap::new, Collectors.mapping(AeronaveDTO::from, Collectors.toList())
+                )).entrySet().stream()
+                .map(x -> new AeronavePorFabricanteDTO(x.getKey(), x.getValue())).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<AeronaveDTO> findRecent(){
+        return aeronaveRepository.findRecent(OffsetDateTime.now().minusDays(7))
+                .stream().map(AeronaveDTO::from).toList();
     }
 }
