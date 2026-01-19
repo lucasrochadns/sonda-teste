@@ -21,11 +21,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AeronaveService {
 
-    @Autowired
+
     private final AeronaveRepository aeronaveRepository;
 
     @Transactional(readOnly = true)
     public Page<AeronaveDTO> findAll(Pageable pageable){
         return aeronaveRepository.findAll(pageable).map(AeronaveDTO::from);
+    }
+
+    @Transactional(readOnly = true)
+    public List<AeronaveDTO> find(String termo){
+        return aeronaveRepository.findByTermo(termo).stream().map(AeronaveDTO::from).toList();
     }
 }
