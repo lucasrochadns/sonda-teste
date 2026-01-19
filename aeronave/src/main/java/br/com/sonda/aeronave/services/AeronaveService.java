@@ -96,4 +96,15 @@ public class AeronaveService {
         return aeronaveRepository.findRecent(OffsetDateTime.now().minusDays(7))
                 .stream().map(AeronaveDTO::from).toList();
     }
+
+    @Transactional
+    public AeronaveDTO patch(Long id, AeronaveDTO aeronaveDTO){
+        Aeronave aeronave = findById(id);
+        if(aeronaveDTO.fabricante() != null) aeronave.setFabricante(aeronaveDTO.fabricante());
+        if(aeronaveDTO.nome() != null) aeronave.setNome(aeronaveDTO.nome());
+        if(aeronaveDTO.anoFabricacao() != null) aeronave.setAnoFabricacao(aeronaveDTO.anoFabricacao());
+        if(aeronaveDTO.vendido() != null) aeronave.setVendido(aeronaveDTO.vendido());
+        aeronave.setUpdateAt(OffsetDateTime.now());
+        return AeronaveDTO.from(aeronaveRepository.save(aeronave));
+    }
 }

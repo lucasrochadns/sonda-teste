@@ -80,5 +80,10 @@ public class AeronaveController {
         aeronaveService.deleteById(id);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<AeronaveDTO> patch(@PathVariable Long id, @Validated @RequestBody AeronaveDTO aeronaveDTO){
+        System.out.println(aeronaveDTO);
+        return ResponseEntity.ok().body(aeronaveService.patch(id, aeronaveDTO));
+    }
 
 }
