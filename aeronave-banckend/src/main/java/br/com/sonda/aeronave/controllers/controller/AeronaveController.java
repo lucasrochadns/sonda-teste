@@ -1,12 +1,10 @@
-package br.com.sonda.aeronave.controller;
+package br.com.sonda.aeronave.controllers.controller;
 
-import br.com.sonda.aeronave.domain.model.Aeronave;
-import br.com.sonda.aeronave.dto.AeronaveDTO;
-import br.com.sonda.aeronave.dto.AeronavePatchDTO;
-import br.com.sonda.aeronave.dto.AeronavePorDecadaDTO;
-import br.com.sonda.aeronave.dto.AeronavePorFabricanteDTO;
+import br.com.sonda.aeronave.controllers.dto.AeronaveDTO;
+import br.com.sonda.aeronave.controllers.dto.AeronavePatchDTO;
+import br.com.sonda.aeronave.controllers.dto.AeronavePorDecadaDTO;
+import br.com.sonda.aeronave.controllers.dto.AeronavePorFabricanteDTO;
 import br.com.sonda.aeronave.services.AeronaveService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,10 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController

@@ -1,4 +1,4 @@
-package br.com.sonda.aeronave.dto;
+package br.com.sonda.aeronave.controllers.dto;
 
 import java.util.List;
 

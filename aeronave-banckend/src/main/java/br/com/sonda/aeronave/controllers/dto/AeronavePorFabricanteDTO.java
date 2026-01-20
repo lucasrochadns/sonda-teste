@@ -1,6 +1,5 @@
-package br.com.sonda.aeronave.dto;
+package br.com.sonda.aeronave.controllers.dto;
 
-import br.com.sonda.aeronave.domain.model.Aeronave;
 import br.com.sonda.aeronave.domain.model.Fabricante;
 
 import java.util.List;

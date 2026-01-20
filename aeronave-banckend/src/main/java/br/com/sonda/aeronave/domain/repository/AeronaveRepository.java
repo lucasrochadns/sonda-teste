@@ -1,6 +1,5 @@
-package br.com.sonda.aeronave.repository;
+package br.com.sonda.aeronave.domain.repository;
 
-import br.com.sonda.aeronave.AeronaveApplication;
 import br.com.sonda.aeronave.domain.model.Aeronave;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

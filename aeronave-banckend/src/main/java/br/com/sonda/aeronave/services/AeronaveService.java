@@ -2,11 +2,11 @@ package br.com.sonda.aeronave.services;
 
 
 import br.com.sonda.aeronave.domain.model.Aeronave;
-import br.com.sonda.aeronave.dto.AeronaveDTO;
-import br.com.sonda.aeronave.dto.AeronavePatchDTO;
-import br.com.sonda.aeronave.dto.AeronavePorDecadaDTO;
-import br.com.sonda.aeronave.dto.AeronavePorFabricanteDTO;
-import br.com.sonda.aeronave.repository.AeronaveRepository;
+import br.com.sonda.aeronave.controllers.dto.AeronaveDTO;
+import br.com.sonda.aeronave.controllers.dto.AeronavePatchDTO;
+import br.com.sonda.aeronave.controllers.dto.AeronavePorDecadaDTO;
+import br.com.sonda.aeronave.controllers.dto.AeronavePorFabricanteDTO;
+import br.com.sonda.aeronave.domain.repository.AeronaveRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.OffsetDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 
