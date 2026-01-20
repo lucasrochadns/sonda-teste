@@ -1,22 +1,33 @@
-export type Fabricante = "EMBRAER" | "BOIENG" | "AIRBUS"
+export type Fabricante = "EMBRAER" | "BOEING" | "AIRBUS";
 
 export type AeronaveDTO = {
-    id?:number;
-    name:string;
-    fabricante: Fabricante;
-    descricao:string;
-    vendido:boolean;
-    createdAt?:string;
-    updatedAt?:string;
+  id?: number;
+  nome: string;              // (Modelo na tela)
+  fabricante: Fabricante;    // (Marca na tela)
+  anoFabricacao: number;     // (Ano na tela)
+  descricao: string;
+  vendido: boolean;
+  createdAt?: string;
+  updateAt?: string;
 };
 
-export type AeronavePorDecadaDTO ={
-   decada:number;
-   aeronaves:AeronaveDTO[];
+export type Page<T> = {
+  content: T[];
+  number: number;        
+  size: number;         
+  totalElements: number;
+  totalPages: number;
+  first: boolean;
+  last: boolean;
 };
 
-export type NaoVendidasResponse = {
-  naoVendidas: number;
+export type AeronavePorDecadaDTO = {
+  anoFabricacao: number;   
+  aeronaveDTO: AeronaveDTO[];
 };
 
+export type AeronavePorFabricanteDTO = {
+  fabricante: string;
+  aeronaveDTO: AeronaveDTO[];
+};
 

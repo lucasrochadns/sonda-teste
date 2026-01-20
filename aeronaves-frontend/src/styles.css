@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com');
+.page {
+  max-width: 920px;
+  margin: 24px auto;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+}
+
+.title {
+  font-family: Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 14px 0;
+  text-align: center;
+}
+
+.error {
+  background: #ffe4e4;
+  border: 1px solid #ffb3b3;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.formBox {
+  width: 360px;
+  margin: 0 auto 14px auto;
+  display: grid;
+  gap: 10px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.field label {
+  display: none; /* na imagem não aparece label */
+}
+
+.field input, .field select {
+  width: 100%;
+  border: 1px solid #222;
+  padding: 6px 8px;
+  height: 30px;
+}
+
+.field.small {
+  width: 160px;
+}
+
+.btn {
+  width: 120px;
+  margin: 0 auto;
+  height: 32px;
+  border: 1px solid #222;
+  background: #e5e5e5;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  height: 30px;
+  border: 1px solid #bbb;
+  background: #f3f4f6;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 16px;
+  margin: 10px 0 12px 0;
+}
+
+.decadas {
+  font-size: 14px;
+}
+
+.statLine {
+  margin: 2px 0;
+}
+
+.semana {
+  justify-self: center;
+  font-size: 14px;
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.search {
+  width: 260px;
+  border: 1px solid #bbb;
+  padding: 6px 8px;
+  height: 30px;
+}
+
+.tableBox {
+  border: 1px solid #bbb;
+  width: fit-content;
+  background: #fff;
+}
+
+.table {
+  border-collapse: collapse;
+  min-width: 620px;
+}
+
+.table thead th {
+  background: #d9d9d9;
+  border: 1px solid #999;
+  padding: 8px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.table tbody td {
+  border: 1px solid #999;
+  padding: 8px;
+  text-align: center;
+}
+
+.vendidoDot {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.deleteBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.empty {
+  padding: 12px !important;
+  color: #666;
+}
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.marcas {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.marcasList {
+  margin-top: 4px;
+  display: grid;
+  gap: 2px;
+}

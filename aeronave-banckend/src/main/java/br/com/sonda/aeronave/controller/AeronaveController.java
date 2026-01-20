@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/aeronaves")
-@RequiredArgsConstructor
 public class AeronaveController {
 
     @Autowired
@@ -50,6 +50,7 @@ public class AeronaveController {
 
     @GetMapping("/por-decada")
     public ResponseEntity<List<AeronavePorDecadaDTO>> findByAnoFabricacao(){
+
         return ResponseEntity.ok().body(aeronaveService.findByAnoFabricacao());
     }
 
